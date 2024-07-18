@@ -1,0 +1,59 @@
+<div class="d-flex flex-row-reverse">
+  <div class="image-container"></div>
+  <form class="form-container d-flex flex-column align-items-center" [formGroup]="loginForm">
+    <p class="title">
+      Bienvenido
+    </p>
+    <p class="subtitle">
+      Sistema de predicción de rendimiento académico.
+    </p>
+
+    <div class="inputs-container d-flex flex-column">
+
+      <label class="label-text">
+        Email
+      </label>
+      <input type="text" formControlName="username" class="input-text">
+
+      <label class="label-text">
+        Contraseña
+      </label>
+      <input type="password" formControlName="password" class="input-text">
+
+      <div class="d-flex align-items-center mt-3">
+        <input type="checkbox" class="check-box">
+        <label class="check-label">
+          Recuerdame
+        </label>
+
+        <a routerLink="/login/recovery"  class="olvide-link">
+          olvidaste la contraseña
+        </a>
+
+      </div>
+
+    </div>
+
+    <button class="btn btn-ingresar" (click)="login()">
+      Ingresar
+    </button>
+
+    <p class="footer">
+      Todos los derechos reservados 2024 | Intevo S.A.S ©
+    </p>
+
+  </form>
+</div>
+
+<div class="modal fade" id="modalExito" tabindex="-1" aria-labelledby="modalExitoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl-custom">
+    <div class="modal-content">
+      <div class="modal-body d-flex flex-column align-items-center">
+        <p class="modal-text">
+          Usuario o contraseña incorrectos, por favor inténtelo de nuevo
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="btn-hiden" #toggleModal data-bs-toggle="modal" data-bs-target="#modalExito"></button>

@@ -1,0 +1,116 @@
+.sidebar{
+  background-color: #5864ff;
+  border-radius: 0 1.5vw 1.5vw 0;
+  height: 100%;
+  box-shadow: 0.8vw 0.2vw 0.5vw #00000036;
+  color: white;
+}
+.escudo-img{
+  width: 60%;
+  object-fit: scale-down;
+  margin-top: 1rem;
+}
+.modulos-text{
+  margin-top: 3rem;
+  align-self: flex-start;
+  font-size: 2vw;
+  font-weight: 900;
+  border-bottom: 5px solid #FFFFFF;
+  margin-bottom: 3rem;
+  margin-left: 10%;
+}
+.side-element{
+  align-self: flex-start;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: white;
+  font-size: 1.1vw;
+  font-weight: 800;
+  margin-left: 10%;
+  width: 90%;
+  align-items: center;
+}
+.side-element:hover{
+  background-color: #7589ff;
+  margin-left: 0;
+  width: 100%;
+}
+.side-element:hover > .div-element{
+  width: 3%;
+  margin-right: 7%;
+  background-color: white;
+  height: 100%;
+  border-radius: 0 0.3vw 0.3vw 0;
+}
+.active-element{
+  background-color: #7589ff;
+  margin-left: 0;
+  width: 100%;
+}
+.div-active{
+  width: 3%;
+  margin-right: 7%;
+  background-color: white;
+  height: 100%;
+  border-radius: 0 0.3vw 0.3vw 0;
+}
+.element-text{
+  padding: 0.5rem 0;
+  margin: 0;
+}
+.element-icon{
+  width: 7%;
+  margin-right: 0.6vw;
+}
+
+.exit-element{
+  align-self: flex-start;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: white;
+  font-size: 1.1vw;
+  font-weight: 800;
+  margin-left: 10%;
+  width: 90%;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-top: auto;
+  margin-bottom: 4rem;
+}
+
+.exit-element:hover{
+  margin-left: 0;
+  padding-left: 10%;
+  background-color: #7589ff;
+  width: 100%;
+}
+
+@media (max-width: 768px){
+  .modulos-text{
+    font-size: 3.5vw;
+  }
+  .escudo-img{
+    width: 80%;
+  }
+  .side-element{
+    margin: 1rem 0;
+  }
+  .element-icon{
+    width: 50%;
+    aspect-ratio: 1/1;
+    margin: 0 auto;
+  }
+  .element-text{
+    display: none;
+  }
+  .div-active{
+    width: 10%;
+    border-radius: 0 3vw 3vw 0;
+  }
+  .side-element:hover > .div-element{
+    width: 10%;
+    border-radius: 0 3vw 3vw 0;
+  }
+}

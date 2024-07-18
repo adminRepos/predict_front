@@ -1,0 +1,124 @@
+.image-container{
+  background-image: url('../../../../assets/university-image.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 100% 100%;
+  width: 50%;
+  height: 100vh;
+  border-radius: 2vw 0 0 2vw;
+}
+.form-container{
+  width: 50%;
+}
+.title{
+  font-size: 4vw;
+  font-weight: 900;
+  margin: 0;
+  margin-top: 20vh;
+}
+.subtitle{
+  font-size: 1.5vw;
+  font-weight: 300;
+  margin: 0;
+}
+.label-text{
+  font-size: 1.2vw;
+  font-weight: 800;
+  margin-top: 5vh;
+}
+.inputs-container{
+  width: 60%;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+.input-text{
+  background-color: white;
+  border-radius: 0.5vw;
+  padding: 0.2rem 1vw;
+  font-size: 1.5vw;
+  margin-top: 0.5rem;
+}
+.olvide-link{
+  font-size: 1vw;
+  color: #fcc040;
+  margin-left: auto;
+}
+.btn-ingresar{
+  background-color: #8c1919;
+  color: white;
+  font-size: 1.5vw;
+  font-weight: 900;
+  width: 40%;
+  margin-top: 1vh;
+  margin-bottom: 5vh;
+}
+.footer{
+  margin-top: auto;
+  margin-bottom: 2rem;
+  opacity: 0.5;
+  font-size: 1vw;
+}
+
+/* modal */
+.modal-text{
+  margin-top: 2rem;
+  font-size: 2vw;
+  text-align: center;
+}
+.modal-xl-custom{
+  --bs-modal-width: 60%;
+}
+.btn-modal{
+  background-color: #8c1919;
+  color: white;
+  font-size: 2vw;
+  font-weight: 900;
+  width: 30%;
+  margin-bottom: 1rem;
+}
+.btn-hiden{
+  display: none;
+}
+
+@media (max-width: 768px){
+  .image-container{
+    width: 0;
+  }
+  .form-container{
+    width: 100%;
+  }
+  .title{
+    font-size: 12vw;
+    margin-top: 15vh;
+    text-align: center;
+  }
+  .subtitle{
+    font-size: 4vw;
+  }
+  .label-text{
+    font-size: 3.5vw;
+  }
+  .input-text{
+    font-size: 4vw;
+    border-radius: 1.5vw;
+    padding: 0.2rem 3vw;
+  }
+  .olvide-link{
+    font-size: 3vw;
+  }
+  .btn-ingresar{
+    font-size: 4.5vw;
+  }
+  .footer{
+    font-size: 2vw;
+    margin-top: 10vh;
+  }
+  .modal-text{
+    width: 80%;
+    font-size: 5vw;
+  }
+  .btn-modal{
+    font-size: 5vw;
+    width: 40%;
+  }
+}

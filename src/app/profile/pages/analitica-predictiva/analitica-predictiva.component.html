@@ -1,0 +1,30 @@
+<div class="d-flex flex-column main-container">
+
+  <p class="title">
+    Analítica predictiva | {{tap}}
+  </p>
+
+  <div class="d-flex selector-bar flex-wrap">
+    <button class="btn btn-selector" *ngFor="let btn of selectorBar; let i = index"
+            [ngClass]="{'btn-active': i==selected }" (click)="changeSelector(i)">
+      {{btn}}
+    </button>
+  </div>
+
+  <div *ngIf="selected == 0">
+    <app-transformaciones></app-transformaciones>
+  </div>
+
+  
+  <div *ngIf="selected == 1">
+    <app-seleccion-variables></app-seleccion-variables>
+  </div>
+
+  <div *ngIf="selected == 2">
+    <app-hiperparametros></app-hiperparametros>
+  </div>
+
+
+  <app-loading [textLoading]="textLoading" *ngIf="isLoading"></app-loading>
+
+</div>

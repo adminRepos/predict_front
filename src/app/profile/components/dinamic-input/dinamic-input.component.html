@@ -1,0 +1,46 @@
+<form [formGroup]="formPredict" (ngSubmit)="onSubmitPredict()">
+  <div class="row">
+    <div class="col-4 d-flex flex-column mt-4" *ngFor="let item of items">
+      <!-- <div *ngIf="item.codigo != ignoreField" class="d-flex flex-column mt-4"> -->
+        <label class="label-text">
+          {{item.descripcion}} <span class="text-danger">*</span>
+        </label>
+  
+        <input type="number" class="input-container" formControlName="{{item.codigo}}" *ngIf="item.rules == undefinied">
+  
+        <select class="input-container" *ngIf="item.rules !== undefinied" formControlName="{{item.codigo}}">
+          <option *ngFor="let i of item.rules" [value]="i.valor">{{i.descripcion}}</option>
+        </select> 
+      <!-- </div> -->
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-4 d-flex flex-column mt-4">
+      <button type="submit" [disabled]="!formPredict.valid" class="btn btn-prediccion" style="margin-bottom: 10px;">Realizar predicción</button>
+    </div>
+
+    <div class="col-8" style="margin-bottom: 10px;" *ngIf="isOpenResult">
+      <div class="row">
+        <!-- <div class="col" *ngFor="let item of mejoresModelos"> -->
+        <div class="col">
+          <div class="card text-center" style="box-shadow: 5px 5px 5px black; padding: 10px">
+            <div class="card-body">
+              <h4 class="card-title">Mejor modelo: {{mejoresModelos[0].nombre}}</h4>
+              <h4 class="card-title">Rendimiento: {{rendimientoSeleccionado.rendimiento}}</h4>
+              <p class="text-start">
+                {{rendimientoSeleccionado.parrafo}}
+                <br>
+                <br>
+                <b>Recomendación:</b> {{rendimientoSeleccionado.recomendacion}}
+              </p>
+              
+              <!-- <h2 class="card-subtitle ">{{ formInitial.tipoModelo == 'clasificacion' ? 'Grupo' : 'Nota'}}: {{item.prediccion}}</h2> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,183 @@
+<div class="d-flex flex-column main-container">
+
+  <p class="sub-title">
+    1.	Seleccione la carrera, el semestre y el tipo de modelo de las listas desplegables correspondientes.<br>
+    2.	Precise el modelo o conjunto de modelos para los cuales desea evidenciar las métricas obtenidas con las variables incidentes.<br>
+    3.	En la parte inferior, visualice los modelos seleccionados junto con sus mejores hiperparámetros.<br>
+    4.	Descargue los resultados en un archivo plano que contiene los modelos inicialmente seleccionados.
+  </p>
+
+  <form [formGroup]="form_data" (ngSubmit)="sendData()">
+
+    <div class="row">
+      <div class="col">
+        <p class="text">
+          1. Seleciona una carrera de la facultad de ingeniería
+        </p>
+      </div>
+      <div class="col">
+        <select name="tipo-carrera" class="form-control inputUD" formControlName="carrera" (change)="getModels()">
+          <option value="" selected>Seleccione una carrera</option>
+          <option [value]="opt.value" *ngFor="let opt of carreraOption">
+            {{opt.option}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p class="text">
+          2. Selección por semestre
+        </p>
+      </div>
+      <div class="col">
+        <select name="tipo-carrera" class="form-control inputUD" formControlName="semestre" (change)="getModels()">
+          <option value="" selected>Seleccione el semestre</option>
+          <option [value]="opt.value" *ngFor="let opt of semestreOption">
+            {{opt.option}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p class="text">
+          3. Selección tipo modelo
+        </p>
+      </div>
+      <div class="col">
+        <select name="tipo-carrera" class="form-control inputUD" formControlName="tipoModelo" (change)="getModels()">
+          <option value="" selected>Seleccione el tipo de modelo</option>
+          <option [value]="opt.value" *ngFor="let opt of tipoModeloOption">
+            {{opt.option}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- <div class="row">
+      <div class="col">
+        <p class="text">
+          4. Selección modelo
+        </p>
+      </div>
+      <div class="col">
+        <select name="tipo-carrera" class="form-control inputUD" formControlName="modelo">
+          <option value="" selected>Seleccione el modelo</option>
+          <option [value]="opt.value" *ngFor="let opt of modelosOption">
+            {{opt.option}}
+          </option>
+        </select>
+      </div>
+    </div> -->
+
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col">
+        <p class="text">
+          4. Selección modelo
+        </p>
+        <ol class="list-group list-group-numbered" style="max-height: 400px; overflow-y: scroll;">
+          <li class="list-group-item" *ngFor="let variables of variablesArr">{{variables.value}}</li>
+        </ol>
+      </div>
+      <div class="col col-lg-6">
+
+          <div class="collapse" id="collapseExample" [ngClass]="{'show': form_data.valid }" style="margin-left: 1vw;">
+            <div class="selection-collapse-container d-flex flex-column">
+              
+              <div class="checks-container d-flex align-items-center">
+                <input type="text" class="input-container" placeholder="Buscar" style="width: 50%;" (keyup)="liveSearch($event)">
+
+                <button type="submit" [disabled]="variablesArr.length == 0" class="btn btn-agregar">Calcular</button>
+                <button type="button" [disabled]="!send" class="btn btn-agregar" (click)="construirCSV()">Descarga</button>
+                <!-- <button class="btn btn-agregar" (click)="realizarTransformacion()">Calcular</button> -->
+              </div>
+              <div class="checks-container d-flex align-items-center">
+                <input id="selectAll" type="checkbox" class="check" (change)="selectAllVariables($event)">
+                <p>
+                  Seleccionar todos
+                </p>
+              </div>
+              <hr>
+  
+              <div class="scroll">
+                <div class="checks-container d-flex align-items-center" *ngFor="let item of modelosOption" name="variablesDiv" [attr.nombre]="item.value">
+                  <input type="checkbox" class="check" (change)="changeContadorVariable($event, item)" name="variablesSelect">
+                  <p class="text-check">
+                    {{item.value}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="row">
+      <div class="col-4 d-flex flex-column mt-4 justify-content-center">
+        <button type="submit" [disabled]="variablesArr.length == 0" class="btn btn-prediccion" style="margin-bottom: 10px;">Mostrar configuración</button>
+        <button type="button" [disabled]="!send" class="btn btn-prediccion" style="margin-bottom: 10px;" (click)="construirCSV()">Descarga .csv</button>
+      </div>
+    </div> -->
+  </form>
+
+  <div *ngIf="isSubmit">
+    <hr>
+
+    <div class="row" *ngFor="let modelo of variablesArr">
+      <h4 class="title" style="text-align: center; color: #fbb217;">Algoritmo Predictivo:</h4>
+      <h2 class="title" style="text-align: center; color: #fbb217;">{{tipoModelo}} | {{modelo.option}}</h2>
+  
+      <div class="col">
+        <div class="table-diry-data-container">
+          <table class="table table-striped">
+            <thead>
+              <!-- <th>#</th> -->
+              <th>METRICA</th>
+              <th>TIPO DE DATO</th>
+              <th>VALOR</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of metricas(modelo.option), index as i">
+                <!-- <td>{{i + 1}}</td> -->
+                <td>{{item.METRICA}}</td>
+                <td>{{item.TIPO_DE_DATOS}}</td>
+                <td>{{item.VALOR}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Hiperparametros -->
+        <div *ngIf="mejoresHiperparametros != undefinied">
+          <hr>
+          <h4 class="title" style="text-align: center; color: #fbb217;">Mejores Hiperparametros</h4>
+          <h2 class="title" style="text-align: center; color: #fbb217;">{{tipoModelo}} | {{modelo.option}}</h2>
+        </div>
+  
+        <div class="table-diry-data-container">
+          <table class="table table-striped">
+            <thead>
+              <th>#</th>
+              <th>METRICA</th>
+              <th>VALOR</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of metricasHiper(modelo.option), index as i">
+                <td>{{i + 1}}</td>
+                <td>{{item.option}}</td>
+                <td>{{item.value}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <app-loading [textLoading]="textLoading" *ngIf="isLoading"></app-loading>
+
+</div>

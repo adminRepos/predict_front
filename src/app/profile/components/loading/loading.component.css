@@ -1,0 +1,56 @@
+.loading-container{
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.392);
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  justify-content: space-evenly;
+}
+.loading-icon{
+  width: 15%;
+}
+.loading-text{
+  text-align: center;
+  width: 50%;
+  font-size: 4vw;
+  color: white;
+  font-weight: 900;
+}
+
+/* animacion */
+
+.rotate {
+  animation: rotation 0.8s infinite step-end;
+}
+
+@keyframes rotation {
+  0%{
+    transform: rotate(0deg);
+  }
+  12.5%{
+    transform: rotate(45deg);
+  }
+  25%{
+    transform: rotate(90deg);
+  }
+  37.5%{
+    transform: rotate(135deg);
+  }
+  50%{
+    transform: rotate(180deg);
+  }
+  62.5%{
+    transform: rotate(225deg);
+  }
+  75%{
+    transform: rotate(270deg);
+  }
+  87.5%{
+    transform: rotate(315deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}

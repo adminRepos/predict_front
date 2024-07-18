@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: front
+    ports:
+      - "4200:4200"
+    restart: always
+    #command: "serve -s build -l 4200"
+
+  #back:
+  #  build:
+  #    context: .
+  #    dockerfile: back/Dockerfile.prod
+  #  container_name: back
+  #  ports:
+  #    - "6500:6500"
+  #  restart: always
+  #  depends_on:
+  #    - mongo
+  #  command: "uvicorn main:easybio --host 0.0.0.0 --port 6500"
+
+  #mongo:
+  #  build:
+  #    context: .
+  #    dockerfile: ./mongo/Dockerfile.mongo
+  #  container_name: mongo
+  #  ports:
+  #    - "27017:27017"
+  #  restart: always
+  #  user: "1000:50"
+  #  volumes:
+  #    - ./mongodb:/data/db
+  #    - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+  #  command: mongod --auth
+
+

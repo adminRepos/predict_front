@@ -1,0 +1,27 @@
+#FROM node:19-alpine
+#WORKDIR /home/node/app
+#RUN npm install -g serve
+#COPY ./package.json /home/node/app
+#ENV REACT_APP_BACK_URL=https://easybio2.easydata.com.co/api/v1
+#ENV REACT_APP_EASYBIO_URL=https://apieasybio.easydata.com.co/api/v2
+#ENV REACT_APP_BASE_URL=/app/
+#ENV REACT_APP_INICIO=start/
+#ENV REACT_APP_LOGIN=login/
+#ENV REACT_APP_APLICATION=aplication/
+#ENV REACT_APP_SIGNUP=signup/
+#ENV REACT_APP_SUCCESS_URL=success/
+#ENV REACT_APP_GET_TEL=get_tel/
+#
+#RUN yarn install
+#COPY . /home/node/app
+#EXPOSE 4200
+#CMD ["ng","serve"]
+
+FROM node:18-alpine
+RUN mkdir /project
+WORKDIR /project
+RUN npm install -g @angular/cli@14.0.7
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+CMD ["ng", "serve", "--host", "0.0.0.0"]

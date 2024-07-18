@@ -1,0 +1,139 @@
+<div class="d-flex flex-column main-container">
+
+  <p class="sub-title">
+    1.	Seleccione la carrera y el semestre de las listas desplegables correspondientes. <br>
+    2.	Establezca el modelo o modelos para los cuales desea evidenciar la significancia de las variables para las predicciones, mostradas en la tabla inferior. <br>
+    3.	Descargue estas incidencias en un archivo plano utilizando el botón disponible. <br>
+  </p>
+
+  <form [formGroup]="form_data" (ngSubmit)="sendData()">
+
+    <div class="row">
+      <div class="col">
+        <p class="text">
+          1. Seleciona una carrera de la facultad de ingeniería
+        </p>
+      </div>
+      <div class="col">
+        <select name="tipo-carrera" class="form-control inputUD" formControlName="carrera" (change)="getData()">
+          <option [value]="''" selected>Seleccione una carrera</option>
+          <option [value]="opt.value" *ngFor="let opt of carreraOption">
+            {{opt.option}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p class="text">
+          2. Seleccióne un semestre
+        </p>
+      </div>
+      <div class="col">
+        <select name="tipo-carrera" class="form-control inputUD" formControlName="semestre" (change)="getData()">
+          <option [value]="''" selected>Seleccione el semestre</option>
+          <option [value]="opt.value" *ngFor="let opt of semestreOption">
+            {{opt.option}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- <div class="row" *ngIf="next > 0">
+      <div class="col">
+        <p class="text">
+          3. Seleccióne los algoritmos
+        </p>
+      </div>
+      <div class="col">
+        <select name="tipo-carrera" class="form-control inputUD">
+          <option [value]="''" selected>Seleccione los algoritmos</option>
+          <option [value]="opt.value" *ngFor="let opt of modelosOption">
+            {{opt.option}}
+          </option>
+        </select>
+      </div>
+    </div> -->
+
+
+    <div class="row" style="margin-bottom: 10px;" *ngIf="next > 0">
+      <div class="col">
+        <p class="text">
+          3. Selección modelo
+        </p>
+        <ol class="list-group list-group-numbered" style="max-height: 400px; overflow-y: scroll;">
+          <li class="list-group-item" *ngFor="let variables of variablesArr">{{variables.value}}</li>
+        </ol>
+      </div>
+      <div class="col col-lg-6">
+
+        <div class="collapse" id="collapseExample" [ngClass]="{'show': form_data.valid }" style="margin-left: 1vw;">
+          <div class="selection-collapse-container d-flex flex-column">
+
+            <div class="checks-container d-flex align-items-center">
+              <input type="text" class="input-container" placeholder="Buscar" style="width: 50%;"
+                (keyup)="liveSearch($event)">
+
+              <button type="submit" [disabled]="variablesArr.length == 0" class="btn btn-agregar">Calcular</button>
+              <button type="button" [disabled]="!send" class="btn btn-agregar"
+                (click)="construirCSV()">Descarga</button>
+            </div>
+            <div class="checks-container d-flex align-items-center">
+              <input id="selectAll" type="checkbox" class="check" (change)="selectAllVariables($event)">
+              <p>
+                Seleccionar todos
+              </p>
+            </div>
+            <hr>
+
+            <div class="scroll">
+              <div class="checks-container d-flex align-items-center" *ngFor="let item of modelosOption"
+                name="variablesDiv" [attr.nombre]="item.value">
+                <input type="checkbox" class="check" (change)="changeContadorVariable($event, item)"
+                  name="variablesSelect">
+                <p class="text-check">
+                  {{item.value}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="next > 1">
+      <hr>
+      <div class="col">
+        <div class="table-diry-data-container">
+          <table class="table table-striped">
+            <thead class="sticky-top">
+              <th>Variable</th>
+              <th *ngFor="let str of variablesArrTemp">{{str.option}}</th>
+              <th>Incidencia</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of datosTemp, index as i">
+                <td>{{item.variable}}</td>
+                <td *ngFor="let key of variablesArrTemp">{{ getItem(item, key.value) }}</td>
+                <td>{{ getIncidencia(item) }}</td>
+                <!-- <td *ngFor="let key of variablesArr">{{ item[key.value] }}</td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="row">
+        <div class="col-4 d-flex flex-column mt-4 justify-content-center">
+          <button type="submit" [disabled]="variablesArr.length == 0" class="btn btn-prediccion" style="margin-bottom: 10px;">Mostrar configuración</button>
+          <button type="button" [disabled]="!send" class="btn btn-prediccion" style="margin-bottom: 10px;" (click)="construirCSV()">Descarga .csv</button>
+        </div>
+      </div> -->
+  </form>
+
+  <app-loading [textLoading]="textLoading" *ngIf="isLoading"></app-loading>
+
+</div>

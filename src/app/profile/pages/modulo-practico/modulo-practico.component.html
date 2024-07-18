@@ -1,0 +1,33 @@
+<div class="d-flex flex-column main-container mb-5">
+
+  <p class="title">
+    Módulo práctico | {{selected == 0 ? 'Predicción individual' : 'Predicción grupal'}}
+  </p>
+
+  <!-- {{texto[selected]}} -->
+  <p class="sub-title">
+    1.	Seleccione la carrera, el semestre y el tipo de modelo de las listas desplegables correspondientes.<br>
+    2.	Para la predicción individual, indique si el análisis se realizará por semestre o por año. Luego, cree el formulario y llene los campos necesarios para la predicción individual.<br>
+    3.	Para la predicción grupal masiva, utilice el archivo cargado y limpiado del módulo de carga y limpieza.<br>
+    4.	Genere estas predicciones y descargue los resultados obtenidos para cada estudiante en un archivo plano.
+  </p>
+
+  <div class="d-flex selector-bar flex-wrap">
+    <button class="btn btn-selector" *ngFor="let btn of selectorBar; let i = index"
+            [ngClass]="{'btn-active': i==selected }" (click)="changeSelector(i)">
+      {{btn}}
+    </button>
+  </div>
+
+  <!-- Predicción individual -->
+  <div *ngIf="selected == 0">
+    <app-practico-individual (loading)="changeLoading($event)"></app-practico-individual>
+  </div>
+
+  <!-- Predicción grupal -->
+  <div *ngIf="selected == 1">
+    <app-practico-grupal (loading)="changeLoading($event)"></app-practico-grupal>
+  </div>
+
+  <app-loading [textLoading]="textLoading" *ngIf="isLoading"></app-loading>
+</div>

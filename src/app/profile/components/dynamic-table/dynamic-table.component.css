@@ -1,0 +1,9 @@
+th.mat-header-cell{
+    padding: 10px !important;
+    background-color: #8c1919 !important;
+    color: white;
+}
+
+td{
+    padding: 10px !important;
+}

@@ -1,0 +1,104 @@
+<div class="d-flex flex-column main-container mb-5">
+
+  <p class="title">
+    Módulo Carga y Limpieza
+  </p>
+
+  <!-- <p class="sub-title">
+    Texto
+  </p> -->
+
+  <div class="d-flex align-items-center justify-content-center selector-container">
+
+    <div class="d-flex flex-column align-items-center" *ngFor="let select of selectorBar; let i = index">
+
+      <div class="selector d-flex align-items-center justify-content-around flex-column"
+        [ngClass]="{'active': i+1==selected, 'check-selector': i+1<selected }">
+
+        <img [src]="select.imgUrl" alt="imagen selector" class="selector-img" *ngIf="i+1>=selected">
+        <img src="/assets/check-icon.svg" alt="imagen check" class="selector-img-check" *ngIf="i+1<selected">
+
+        <p class="selector-text" *ngIf="i+1>=selected">
+          {{select.title}}
+        </p>
+
+      </div>
+
+      <p class="text-select">
+        Paso {{i+1}}
+      </p>
+
+    </div>
+
+
+  </div>
+
+
+  <form [formGroup]="formInitial" (ngSubmit)="onSubmit()" style="margin-bottom: 20px;">
+    <div class="row">
+      <div class="col-2 d-flex flex-column mt-4">
+        <label class="label-text">
+          Carrera <span class="text-danger">*</span>
+        </label>
+        <select class="input-container" formControlName="carrera">
+          <option *ngFor="let item of carreraOption" [value]="item.value">{{item.option}}</option>
+        </select>
+        <span class="campoRequerido" *ngIf="formInitial.controls['carrera'].getError('required')">- Este campo es
+          obligatorio</span>
+      </div>
+      <div class="col-2 d-flex flex-column mt-4">
+        <label class="label-text">
+          Archivo: <span class="text-danger">*</span>
+        </label>
+        <input type="file" id="input-data" (change)="saveFile($event)"
+          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+          formControlName="file" class="form-control input-container">
+        <span class="campoRequerido" *ngIf="formInitial.controls['file'].getError('required')">- Este campo es
+          obligatorio</span>
+      </div>
+      <!-- <div class="col-2 d-flex flex-column mt-4">
+          <label class="label-text">
+            Modelo <span class="text-danger">*</span>
+          </label>
+          <select class="input-container" formControlName="tipoModelo">
+            <option *ngFor="let item of modeloOption" [value]="item.value">{{item.option}}</option>
+          </select>
+          <span class="campoRequerido" *ngIf="formInitial.controls['tipoModelo'].getError('required')">- Este campo es obligatorio</span>
+        </div> -->
+      <div class="col-6 mt-4 d-flex justify-content-start align-items-center">
+        <button type="submit" [disabled]="!formInitial.valid" class="btn btn-prediccion">Realizar limpieza</button>
+        <button type="button" [disabled]="!formInitial.valid" class="btn btn-prediccion" (click)="limpiarForm()">Limpiar
+          campos</button>
+        <button type="button" [disabled]="selected !== 3" class="btn btn-prediccion" (click)="construirCSV()">Descargar data</button>
+      </div>
+    </div>
+  </form>
+  
+  <div class="row">
+
+    <div class="col-lg-12" *ngIf="funciono == true">
+      <hr>
+      <h1 style="text-align: center; color: #fbb217; margin-bottom: 10px;">Data sin limpiar</h1>
+      <h2 style="text-align: center; color: #fbb217; margin-bottom: 20px;">Carrera: {{tempCarrera}}</h2>
+      
+      <app-dynamic-table [displayedColumns]="dataInput.columnas" [data]="dataInput.data"></app-dynamic-table>
+
+      <hr>
+      <h1 style="text-align: center; color: #fbb217; margin-bottom: 10px;">Data limpia</h1>
+      <h2 style="text-align: center; color: #fbb217; margin-bottom: 20px;">Carrera: {{tempCarrera}}</h2>
+      
+      <app-dynamic-table [displayedColumns]="dataOutput.columnas" [data]="dataOutput.data" style="margin-top: 20px;"></app-dynamic-table>
+    </div>
+      
+    <div class="col-lg-6" *ngIf="funciono == false">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Oh oh!</strong> {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="funciono = undefined"></button>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <app-loading [textLoading]="textLoading" *ngIf="isLoading"></app-loading>
+</div>

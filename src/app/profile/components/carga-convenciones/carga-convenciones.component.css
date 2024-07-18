@@ -1,0 +1,185 @@
+.selector-container{
+  margin: 4rem 0 calc(4rem + 3vw);
+  border-radius: 0.5vw;
+  background-color: #064e69;
+  height: 0.5rem;
+}
+.selector{
+  background-color: #979797;
+  margin: 3vw 4vw 0;
+  width: 7vw;
+  height: 7vw;
+  border-radius: 5vw;
+}
+.active{
+  background-color: #fbb217;
+}
+.check-selector{
+  background-color: #0be845;
+}
+.selector-img{
+  width: 30%;
+  aspect-ratio: 1/1;
+  margin-top: 0.8rem;
+}
+.selector-img-check{
+  width: 60%;
+}
+.selector-text{
+  font-size: 0.9vw;
+  font-weight: 800;
+  color: white;
+  text-align: center;
+  width: 70%;
+}
+.text-select{
+  font-size: 1.2vw;
+  font-weight: 900;
+  color: #8a161d;
+}
+
+/* Pasos */
+
+.title-pasos{
+  font-size: 1.5vw;
+  color: #fbb217;
+  font-weight: 900;
+  margin: 0;
+}
+
+.label-input-data{
+  cursor: pointer;
+  width: 25%;
+  padding: 1rem 1vw;
+  background-color: #064e69;
+  border-radius: 1vw;
+  color: white;
+  font-weight: 800;
+  margin: 1rem 0 2rem;
+}
+.label-input-data img{
+  width: 10%;
+}
+#input-data{
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.table-diry-data-container{
+  overflow: auto;
+  max-height: 70vh;
+  margin: 1rem 0 2rem;
+}
+
+th,td{
+  white-space: nowrap;
+  text-align: center;
+  padding: 1rem 2vw;
+  font-size: 1.2vw;
+}
+
+thead tr th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+.btn-subir-paso1{
+  align-self: flex-end;
+  width: fit-content;
+  padding: 0.5rem 2vw;
+  background-color: #8c1919;
+  color: white;
+  font-size: 1.5vw;
+  font-weight: 800;
+  border-radius: 1vw;
+  margin-left: 1vw;
+}
+
+.btn-modal{
+  background-color: #8c1919;
+  color: white;
+  font-size: 3.3vw;
+  font-weight: 900;
+  width: 30%;
+}
+.modal-xl-custom{
+  --bs-modal-width: 60%;
+}
+.btn-cancelar{
+  align-self: flex-end;
+  width: fit-content;
+  padding: 0.5rem 2vw;
+  background-color: #373435;
+  color: white;
+  font-size: 1.5vw;
+  font-weight: 800;
+  border-radius: 1vw;
+}
+.btn-hiden{
+  display: none;
+}
+.modal-text-2{
+  font-size: 3vw;
+  font-weight: 800;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+  padding: 0;
+  color: #8c1919;
+}
+.check-icon{
+  width: 20%;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px){
+  .selector{
+    width: 15vw;
+    height: 15vw;
+    border-radius: 10vw;
+    margin-top: 6vw;
+  }
+  .selector-img{
+    width: 40%;
+    margin-top: 1rem;
+  }
+  .selector-text{
+    font-size: 1.5vw;
+  }
+  .text-select{
+    font-size: 2.55vw;
+  }
+  .title-pasos{
+    font-size: 4vw;
+  }
+  .selector-carrera{
+    font-size: 2.5vw;
+    border-radius: 2vw;
+  }
+  .label-input-data{
+    width: 80%;
+    border-radius: 3vw;
+  }
+  th,td{
+    font-size: 3vw;
+  }
+  .btn-subir-paso1{
+    font-size: 2.5vw;
+  }
+  .btn-cancelar{
+    font-size: 2.5vw;
+  }
+  .modal-text{
+    font-size: 8vw;
+    margin-bottom: 1rem;
+  }
+  .btn-modal{
+    font-size: 5vw;
+    width: 40%;
+  }
+  .modal-text-2{
+    font-size: 8vw;
+  }
+}

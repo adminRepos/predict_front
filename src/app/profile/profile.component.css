@@ -1,0 +1,19 @@
+.sidebar{
+  position: fixed;
+  width: 18vw;
+  height: 100%;
+}
+.main{
+  margin-left: 18%;
+  width: 82vw;
+}
+.footer{
+  margin: 2rem 2vw;
+  opacity: 0.5;
+  font-size: 1vw;
+}
+@media (max-width: 768px){
+  .footer{
+    font-size: 2vw;
+  }
+}

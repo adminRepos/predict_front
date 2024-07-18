@@ -1,0 +1,32 @@
+<mat-form-field class="example-chip-list">
+    <mat-chip-list #chipList aria-label="Fruit selection" [formControl]="fruitCtrl">
+      <mat-chip
+        *ngFor="let fruit of fruits"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(fruit)">
+        {{fruit}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="New fruit..."
+        matInput
+        type="text"
+        #fruitInput
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+        {{fruit}}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="fruitCtrl.invalid">boooe</mat-error>
+    <mat-hint *ngIf="!fruitCtrl.pristine && !fruits.length"><span class="mat-error">Please select a fruit</span></mat-hint>
+  </mat-form-field>
+  <!-- invalid: {{!fruitCtrl.pristine && !fruits.length}}
+  {{fruits.length}}
+  {{fruitCtrl.pristine}} -->

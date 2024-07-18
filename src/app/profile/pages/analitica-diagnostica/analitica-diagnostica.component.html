@@ -1,0 +1,105 @@
+<div class="d-flex flex-column main-container">
+
+  <p class="title">
+    Módulo Analítica Diagnóstica
+  </p>
+
+
+  <p class="sub-title">
+    1.	Seleccione la carrera y el semestre de las listas desplegables correspondientes.<br>
+    2.	Indique el par o trío de variables que desea comparar mediante un gráfico de barras.<br>
+    3.	Descargue los datos comparados en formato de archivo plano.
+  </p>
+
+  <form [formGroup]="form_data">
+
+    <div class="row">
+      <div class="col">
+        <p class="text">
+          1. Seleciona una carrera de la facultad de ingeniería
+        </p>
+      </div>
+      <div class="col">
+        <select class="form-control inputUD" formControlName="carrera" (change)="seleccionarVariables($event)" id="inputCarrera">
+          <option value="" selected>Seleccione una carrera</option>
+          <option [value]="opt.value" *ngFor="let opt of carreraOption">
+            {{opt.option}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p class="text">
+          2. Selección por semestre
+        </p>
+      </div>
+      <div class="col">
+        <select class="form-control inputUD" formControlName="semestre" (change)="seleccionarVariables($event)" id="inputSemestre">
+          <option value="" selected>Seleccione el semestre</option>
+          <option [value]="opt.value" *ngFor="let opt of semestreOption">
+            {{opt.option}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 10px;" *ngIf="isOpenVariable">
+      <div class="col">
+        <p class="text">
+          3. Seleccióne variables (Mínimo 2 / Máximo 3)
+        </p>
+        <ol class="list-group list-group-numbered" style="max-height: 400px; overflow-y: scroll;">
+          <li class="list-group-item" *ngFor="let variables of variablesArr">{{variables.descripcion}}</li>
+        </ol>
+      </div>
+      <div class="col col-lg-6">
+
+        <div class="collapse" id="collapseExample" [ngClass]="{'show': isOpenVariable}" style="margin-left: 1vw;">
+
+          <div class="selection-collapse-container d-flex flex-column">
+
+            <div class="checks-container d-flex align-items-center">
+              <input type="text" class="input-container" placeholder="Buscar" style="width: 50%;"
+                (keyup)="liveSearch($event)">
+
+                <button class="btn btn-agregar" (click)="postDiagnostica()" [disabled]="!(variablesArr.length >= 2 && variablesArr.length <= 3)">Calcular</button>
+                <button class="btn btn-agregar" (click)="construirCSV()" [disabled]="!isOpenGraphics">Descargar</button>
+            </div>
+            <!-- <div class="checks-container d-flex align-items-center">
+              <input id="selectAll" type="checkbox" class="check" (change)="selectAllVariables($event)">
+              <p>
+                Seleccionar todos
+              </p>
+            </div> -->
+            <hr>
+
+            <div class="scroll">
+              <div class="checks-container d-flex align-items-center" *ngFor="let item of variablesSemestre"
+                name="variablesDiv" [attr.nombre]="item.descripcion">
+                <input type="checkbox" class="check" (change)="changeContadorVariable($event, item)"
+                  name="variablesSelect">
+                <p class="text-check">
+                  {{item.descripcion}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <div *ngIf="isOpenGraphics">
+    <div class="row">
+      <div class="col">
+        <img src='data:image/png;base64, {{images}}' alt="imagen">
+      </div>
+    </div>
+  </div>
+
+  <app-loading [textLoading]="textLoading" *ngIf="isLoading"></app-loading>
+
+</div>

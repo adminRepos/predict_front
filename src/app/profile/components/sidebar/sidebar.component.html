@@ -1,0 +1,22 @@
+<div class="sidebar d-flex flex-column align-items-center">
+  <img src="/assets/intevo-logo.png" alt="Logo Intevo S.A.S" class="escudo-img">
+  <p class="modulos-text">
+    Módulos
+  </p>
+  <a [routerLink]="el.url" *ngFor="let el of sideElements"
+     class="side-element d-flex align-items-center" routerLinkActive="active-element">
+      <div routerLinkActive="div-active" class="div-element"></div>
+      <img [src]="el.imgUrl" alt="elemento sidebar" class="element-icon">
+      <p class="element-text">
+        {{el.name}}
+      </p>
+  </a>
+
+  <button class="exit-element d-flex align-items-center" (click)="logout()">
+      <img src="/assets/logout-icon.svg" alt="elemento sidebar" class="element-icon">
+      <p class="element-text">
+        Salir
+      </p>
+  </button>
+
+</div>

@@ -1,0 +1,322 @@
+<div class="d-flex flex-column w-100">
+
+  <div class="d-flex align-items-center justify-content-center selector-container">
+
+    <div class="d-flex flex-column align-items-center"  *ngFor="let select of selectorBar; let i = index">
+
+      <div class="selector d-flex align-items-center justify-content-around flex-column"
+         [ngClass]="{'active': i+1==selected, 'check-selector': i+1<selected }">
+
+        <img [src]="select.imgUrl" alt="imagen selector" class="selector-img" *ngIf="i+1>=selected">
+        <img src="/assets/check-icon.svg" alt="imagen check" class="selector-img-check" *ngIf="i+1<selected">
+
+        <p class="selector-text" *ngIf="i+1>=selected">
+          {{select.title}}
+        </p>
+
+      </div>
+
+      <p class="text-select">
+        Paso {{i+1}}
+      </p>
+
+    </div>
+
+
+  </div>
+
+  <form class="d-flex flex-column" *ngIf="selected == 1" [formGroup]="form_data">
+
+    <p class="title-pasos">
+      I. Seleccione la carrera
+    </p>
+
+    <select name="tipo-carrera" id="facultad" class="selector-carrera" formControlName="tipoCarrera" [attr.disabled]="selectDisbled()">
+      <option value="" selected>Seleccione una carrera</option>
+      <option [value]="opt.value" *ngFor="let opt of carreraOption">
+        {{opt.option}}
+      </option>
+    </select>
+
+    <p class="title-pasos">
+      II. Carga de información
+    </p>
+
+    <label for="input-data" class="label-input-data d-flex justify-content-around align-items-center"
+           [ngClass]="{'label-disable':this.form_data.controls['tipoCarrera'].value == ''}">
+      Carga de informacion
+      <img src="/assets/upload-icon.svg" alt="upload">
+    </label>
+    <input type="file" id="input-data" (change)="saveFile($event)"
+           accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+           [disabled]="this.form_data.controls['tipoCarrera'].value == ''">
+
+    <div class="d-flex flex-column" *ngIf="isData">
+      <p class="title-pasos">
+        III. Vista predeterminada de la información
+      </p>
+
+      <div class="table-diry-data-container">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <!-- <th *ngFor="let header of dirtyData.columns"> -->
+              <th *ngFor="let header of columns">
+                {{header}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let header of returnData; let i = index">
+              <td>
+                {{i+1}}
+              </td>
+              <td *ngFor="let col of returnData[i]">
+                {{col}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button class="btn btn-subir-paso1" data-bs-toggle="modal" data-bs-target="#modalContinue">
+        Subir informacion
+      </button>
+    </div>
+
+  </form>
+
+  <div class="d-flex flex-column" *ngIf="selected == 2" >
+
+    <div class="d-flex flex-column">
+      <p class="title-pasos" *ngIf="!limpieza_flag">
+        Limpieza de documento
+      </p>
+
+      <p class="title-pasos" *ngIf="limpieza_flag">
+        Resultado previo a la limpieza
+      </p>
+
+      <div class="table-diry-data-container">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th *ngFor="let header of columns">
+                {{header}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let header of returnData; let i = index">
+              <td>
+                {{i+1}}
+              </td>
+              <td *ngFor="let col of returnData[i]">
+                {{col}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="title-pasos" *ngIf="limpieza_flag">
+        Resultado limpieza
+      </p>
+
+      <div class="table-diry-data-container" *ngIf="limpieza_flag">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th *ngFor="let header of columns">
+                {{header}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let header of returnDataCleaned; let i = index">
+              <td>
+                {{i+1}}
+              </td>
+              <td *ngFor="let col of returnDataCleaned[i]">
+                {{col}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button class="btn btn-subir-paso1" (click)="limpieza()" *ngIf="!limpieza_flag">
+        Realizar Limpieza
+      </button>
+
+      <div class="d-flex justify-content-end" *ngIf="limpieza_flag">
+
+        <button class="btn btn-cancelar" (click)="resetAll()">
+          Cancelar
+        </button>
+
+        <button class="btn btn-subir-paso1" (click)="addSelected()">
+          Continuar
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="d-flex flex-column" *ngIf="selected >= 3" >
+
+    <div class="d-flex flex-column">
+      <p class="title-pasos" *ngIf="!new_variables_flag">
+        Generación de nuevas variables
+      </p>
+
+      <p class="title-pasos" *ngIf="new_variables_flag">
+        Creación de nuevas variables
+      </p>
+
+      <div class="table-diry-data-container">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th *ngFor="let header of columns">
+                {{header}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let header of returnDataCleaned; let i = index">
+              <td>
+                {{i+1}}
+              </td>
+              <td *ngFor="let col of returnDataCleaned[i]">
+                {{col}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="title-pasos" *ngIf="new_variables_flag">
+        Resultado de nuevas variables
+      </p>
+
+      <div class="table-diry-data-container" *ngIf="new_variables_flag">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th *ngFor="let header of nuevasVariables.columns">
+                {{header}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let header of nuevasVariables.data; let i = index">
+              <td>
+                {{i+1}}
+              </td>
+              <td *ngFor="let col of nuevasVariables.data[i]">
+                {{col}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button class="btn btn-subir-paso1" (click)="newVariables()" *ngIf="!new_variables_flag">
+        Calcular nuevas variables
+      </button>
+
+      <div class="d-flex justify-content-end" *ngIf="new_variables_flag">
+
+        <button class="btn btn-cancelar" (click)="resetAll()">
+          Cancelar
+        </button>
+
+        <button class="btn btn-subir-paso1" (click)="save()">
+          Guardar
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal fade" id="modalContinue" tabindex="-1" aria-labelledby="modalContinueLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl-custom">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-text">
+            ¿Seguro que deseas subir esta información?
+          </p>
+          <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-modal" data-bs-dismiss="modal" (click)="addSelected()">Sí</button>
+            <button type="button" class="btn btn-modal" data-bs-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalExito" tabindex="-1" aria-labelledby="modalExitoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl-custom">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex flex-column align-items-center">
+          <img src="/assets/check-orange-icon.svg" alt="correcto" class="check-icon">
+          <p class="modal-text-2">
+            La información ha sido guardada con éxito
+          </p>
+          <div class="d-flex justify-content-center mt-5 w-100">
+            <button type="button" class="btn btn-modal" data-bs-dismiss="modal" (click)="resetAll()">Continuar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-hiden" #toggleModal data-bs-toggle="modal" data-bs-target="#modalExito"></button>
+
+  <div class="modal fade" id="modalError" tabindex="-1" aria-labelledby="modalErrorLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl-custom">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex flex-column align-items-center">
+          <p class="modal-text-2">
+            Error en el formato del archivo, por favor vuelva a intentarlo
+          </p>
+          <div class="d-flex justify-content-center mt-5 w-100">
+            <button type="button" class="btn btn-modal" data-bs-dismiss="modal">Continuar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-hiden" #toggleModalError data-bs-toggle="modal" data-bs-target="#modalError"></button>
+
+  <app-loading [textLoading]="textLoading" *ngIf="isLoading"></app-loading>
+
+</div>

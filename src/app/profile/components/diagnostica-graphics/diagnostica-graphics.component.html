@@ -1,0 +1,288 @@
+<div class="d-flex flex-column" [ngClass]="{'hidden':false}">
+  <p class="title-filtros">
+    Selección de filtros: {{filterText}}, variables y transformaciones
+  </p>
+
+  <div class="d-flex flex-column" [ngClass]="{'hidden':!graphicValidator['chart0']}">
+    <p class="text-graphics">
+      {{filterText}}, {{getVariable(0)}}
+    </p>
+    <div class="d-flex flex-column">
+
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column graph-col graph-col-1">
+
+          <canvas  id="chart0"></canvas>
+
+          <p class="label-text">
+            Analítica diagnostica
+          </p>
+
+        </div>
+
+        <div class="d-flex flex-column graph-col graph-col-2">
+
+          <canvas  id="chartBig01" [ngClass]="{'hidden':!graphicValidator['chartBig01']}"></canvas>
+          <canvas  id="chartBig02" [ngClass]="{'hidden':!graphicValidator['chartBig02']}"></canvas>
+          <canvas  id="chartBig03" [ngClass]="{'hidden':!graphicValidator['chartBig03']}"></canvas>
+          <canvas  id="chartBig04" [ngClass]="{'hidden':!graphicValidator['chartBig04']}"></canvas>
+
+          <p class="label-text">
+            Analítica diagnostica | {{getLegend(0,transformation_selected[0])}}
+          </p>
+
+        </div>
+      </div>
+
+      <div class="d-flex flex-row-reverse">
+        <div class="graphic-selectors-container d-flex justify-content-center">
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall01']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall01')">
+            <canvas  id="chartSmall01" ></canvas>
+            <p class="small-text">
+              {{getLegend(0,0)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall02']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall02')">
+            <canvas  id="chartSmall02" ></canvas>
+            <p class="small-text">
+              {{getLegend(0,1)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall03']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall03')">
+            <canvas  id="chartSmall03" ></canvas>
+            <p class="small-text">
+              {{getLegend(0,2)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall04']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall04')">
+            <canvas  id="chartSmall04" ></canvas>
+            <p class="small-text">
+              {{getLegend(0,3)}}
+            </p>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="d-flex flex-column" [ngClass]="{'hidden':!graphicValidator['chart1']}">
+    <p class="text-graphics">
+      {{filterText}}, {{getVariable(1)}}
+    </p>
+    <div class="d-flex flex-column">
+
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column graph-col graph-col-1">
+
+          <canvas  id="chart1"></canvas>
+
+          <p class="label-text">
+            Analítica diagnostica
+          </p>
+
+        </div>
+
+        <div class="d-flex flex-column graph-col graph-col-2">
+
+          <canvas  id="chartBig11" [ngClass]="{'hidden':!graphicValidator['chartBig11']}"></canvas>
+          <canvas  id="chartBig12" [ngClass]="{'hidden':!graphicValidator['chartBig12']}"></canvas>
+          <canvas  id="chartBig13" [ngClass]="{'hidden':!graphicValidator['chartBig13']}"></canvas>
+          <canvas  id="chartBig14" [ngClass]="{'hidden':!graphicValidator['chartBig14']}"></canvas>
+
+          <p class="label-text">
+            Analítica diagnostica | {{getLegend(0,transformation_selected[1])}}
+          </p>
+
+        </div>
+      </div>
+
+      <div class="d-flex flex-row-reverse">
+        <div class="graphic-selectors-container d-flex justify-content-center">
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall11']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall11')">
+            <canvas  id="chartSmall11" ></canvas>
+            <p class="small-text">
+              {{getLegend(1,0)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall12']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall12')">
+            <canvas  id="chartSmall12" ></canvas>
+            <p class="small-text">
+              {{getLegend(1,1)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall13']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall13')">
+            <canvas  id="chartSmall13" ></canvas>
+            <p class="small-text">
+              {{getLegend(1,2)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall14']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall14')">
+            <canvas  id="chartSmall14" ></canvas>
+            <p class="small-text">
+              {{getLegend(1,3)}}
+            </p>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="d-flex flex-column" [ngClass]="{'hidden':!graphicValidator['chart2']}">
+    <p class="text-graphics">
+      {{filterText}}, {{getVariable(2)}}
+    </p>
+    <div class="d-flex flex-column">
+
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column graph-col graph-col-1">
+
+          <canvas  id="chart2"></canvas>
+
+          <p class="label-text">
+            Analítica diagnostica
+          </p>
+
+        </div>
+
+        <div class="d-flex flex-column graph-col graph-col-2">
+
+          <canvas  id="chartBig21" [ngClass]="{'hidden':!graphicValidator['chartBig21']}"></canvas>
+          <canvas  id="chartBig22" [ngClass]="{'hidden':!graphicValidator['chartBig22']}"></canvas>
+          <canvas  id="chartBig23" [ngClass]="{'hidden':!graphicValidator['chartBig23']}"></canvas>
+          <canvas  id="chartBig24" [ngClass]="{'hidden':!graphicValidator['chartBig24']}"></canvas>
+
+          <p class="label-text">
+            Analítica diagnostica | {{getLegend(0,transformation_selected[2])}}
+          </p>
+
+        </div>
+      </div>
+
+      <div class="d-flex flex-row-reverse">
+        <div class="graphic-selectors-container d-flex justify-content-center">
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall21']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall21')">
+            <canvas  id="chartSmall21" ></canvas>
+            <p class="small-text">
+              {{getLegend(2,0)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall22']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall22')">
+            <canvas  id="chartSmall22" ></canvas>
+            <p class="small-text">
+              {{getLegend(2,1)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall23']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall23')">
+            <canvas  id="chartSmall23" ></canvas>
+            <p class="small-text">
+              {{getLegend(2,2)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall24']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall24')">
+            <canvas  id="chartSmall24" ></canvas>
+            <p class="small-text">
+              {{getLegend(2,3)}}
+            </p>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="d-flex flex-column" [ngClass]="{'hidden':!graphicValidator['chart3']}">
+    <p class="text-graphics">
+      {{filterText}}, {{getVariable(3)}}
+    </p>
+    <div class="d-flex flex-column">
+
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column graph-col graph-col-1">
+
+          <canvas  id="chart3"></canvas>
+
+          <p class="label-text">
+            Analítica diagnostica
+          </p>
+
+        </div>
+
+        <div class="d-flex flex-column graph-col graph-col-2">
+
+          <canvas  id="chartBig31" [ngClass]="{'hidden':!graphicValidator['chartBig31']}"></canvas>
+          <canvas  id="chartBig32" [ngClass]="{'hidden':!graphicValidator['chartBig32']}"></canvas>
+          <canvas  id="chartBig33" [ngClass]="{'hidden':!graphicValidator['chartBig33']}"></canvas>
+          <canvas  id="chartBig34" [ngClass]="{'hidden':!graphicValidator['chartBig34']}"></canvas>
+
+          <p class="label-text">
+            Analítica diagnostica | {{getLegend(0,transformation_selected[3])}}
+          </p>
+
+        </div>
+      </div>
+
+      <div class="d-flex flex-row-reverse">
+        <div class="graphic-selectors-container d-flex justify-content-center">
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall31']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall31')">
+            <canvas  id="chartSmall31" ></canvas>
+            <p class="small-text">
+              {{getLegend(3,0)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall32']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall32')">
+            <canvas  id="chartSmall32" ></canvas>
+            <p class="small-text">
+              {{getLegend(3,1)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall33']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall33')">
+            <canvas  id="chartSmall33" ></canvas>
+            <p class="small-text">
+              {{getLegend(3,2)}}
+            </p>
+          </button>
+
+          <button [ngClass]="{'hidden':!graphicValidator['chartSmall34']}" class="canvas-small" (click)="seleccionarGrafica('chartSmall34')">
+            <canvas  id="chartSmall34" ></canvas>
+            <p class="small-text">
+              {{getLegend(3,3)}}
+            </p>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <button class="btn-descargar">
+    Descargar Informe
+  </button>
+
+</div>

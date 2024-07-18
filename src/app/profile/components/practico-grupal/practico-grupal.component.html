@@ -1,0 +1,42 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-2 d-flex flex-column mt-4">
+        <label class="label-text">
+          Modelo <span class="text-danger">*</span>
+        </label>
+        <select class="input-container" formControlName="tipoModelo">
+          <option *ngFor="let item of modeloOption" [value]="item.value">{{item.option}}</option>
+        </select>
+        <span class="campoRequerido" *ngIf="form.controls['tipoModelo'].getError('required')">- Este campo es obligatorio</span>
+      </div>
+      <div class="col-2 d-flex flex-column mt-4">
+        <label class="label-text">
+          Carrera <span class="text-danger">*</span>
+        </label>
+        <select class="input-container" formControlName="carrera">
+          <option *ngFor="let item of carreraOption" [value]="item.value">{{item.option}}</option>
+        </select>
+        <span class="campoRequerido" *ngIf="form.controls['carrera'].getError('required')">- Este campo es obligatorio</span>
+      </div>
+
+  
+      <div class="col-2 flex-column mt-4" id="divSemestre">
+        <label class="label-text">
+          Semestre <span class="text-danger">*</span>
+        </label>
+        <select class="input-container" formControlName="semestre" id="inputSemestre">
+          <option [value]="0" selected>Seleccione un semestre</option>
+          <option *ngFor="let item of semestreOption" [value]="item">{{item}}</option>
+        </select>
+        <span class="campoRequerido" *ngIf="form.controls['semestre'].getError('required')">- Este campo es obligatorio</span>
+      </div>
+  
+      <div class="col-4 d-flex flex-column mt-4 justify-content-center">
+        <button 
+          type="submit" 
+          [disabled]="!form.valid" class="btn btn-prediccion" style="margin-bottom: 10px;">Generar data</button>
+        <button type="button" [disabled]="!form.valid" class="btn btn-prediccion" (click)="limpiarForm()">Limpiar</button>
+      </div>
+  
+    </div>
+  </form>

@@ -1,0 +1,38 @@
+<div class="d-flex flex-column">
+  <div class="d-flex flex-column">
+
+    <p class="title-pasos">
+      Historial de Carga
+    </p>
+
+    <div class="table-history-data-container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>
+              #
+            </th>
+            <th *ngFor="let header of historyData.columns">
+              {{header}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let header of historyData.data; let i = index">
+            <td>
+              {{i+1}}
+            </td>
+            <td *ngFor="let col of historyData.data[i]; let j = index">
+              <p *ngIf="j!=4">
+                {{col}}
+              </p>
+              <img src="/assets/check-limpieza-icon.svg" alt="check limpieza" *ngIf="j==4" class="check-icon">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

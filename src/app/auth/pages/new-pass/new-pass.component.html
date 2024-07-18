@@ -1,0 +1,51 @@
+<div class="d-flex flex-row-reverse">
+  <div class="image-container"></div>
+  <form class="form-container d-flex flex-column align-items-center" [formGroup]="loginForm">
+    <p class="title">
+      Nueva contraseña
+    </p>
+    <p class="subtitle">
+      Por favor ingresa tu nueva contraseña:
+    </p>
+
+    <div class="inputs-container d-flex flex-column mb-5">
+
+      <label class="label-text">
+        Contraseña
+      </label>
+      <input type="password" formControlName="pass" class="input-text">
+
+      <label class="label-text">
+        Confirma tu contraseña
+      </label>
+      <input type="password" formControlName="confirm_pass" class="input-text">
+
+    </div>
+
+    <button class="btn btn-ingresar" (click)="save_password()">
+      Guardar
+    </button>
+
+    <p class="footer">
+      Todos los derechos reservados 2022 | Universidad Distrital Francisco José de Caldas ©
+    </p>
+
+  </form>
+</div>
+
+<div class="modal fade" id="modalExito" tabindex="-1" aria-labelledby="modalExitoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl-custom">
+    <div class="modal-content">
+      <div class="modal-body d-flex flex-column align-items-center">
+        <p class="modal-text">
+          {{message}}
+        </p>
+        <div class="d-flex justify-content-center mt-5 w-100" *ngIf="!error_passwords_flag">
+          <button type="button" class="btn btn-modal" data-bs-dismiss="modal" (click)="goToLogin()">Continuar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="btn-hiden" #toggleModal data-bs-toggle="modal" data-bs-target="#modalExito"></button>

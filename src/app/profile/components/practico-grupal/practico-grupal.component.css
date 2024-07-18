@@ -1,0 +1,59 @@
+.label-text {
+    font-size: 1vw;
+    color: #064E69;
+  }
+  
+  .input-container {
+    font-size: 1vw;
+    margin-top: 1rem;
+    padding: 0.5rem 0.5vw;
+    border-radius: 0.5vw;
+    box-shadow: 0.2vw 0.2vw 0.5vw #00000036;
+    background-color: white;
+    /* flex-grow: 1; */
+    border: 1px solid #555;
+  }
+  
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+  
+  input[type=number] {
+    appearance: textfield;
+  }
+  
+  /* Errors */
+  
+  .error-message{
+    font-size: 1vw;
+    color: red;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Validaciones*/
+  
+  .campoRequerido{
+    color: #8c1919
+  }
+  
+  /* Botones */
+  
+  .btn-prediccion{
+    background-color: #8c1919;
+    color: white;
+    font-size: 1.2vw;
+    font-weight: 900;
+    border-radius: 0.5vw;
+    width: 70%;
+  }
+  
+  .btn-prediccion:disabled{
+    background-color: #373435;
+  }
+  
+  .btn-prediccion:active{
+    background-color: #444243;
+    color: white;
+  }

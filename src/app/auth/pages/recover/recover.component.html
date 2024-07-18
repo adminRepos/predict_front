@@ -1,0 +1,47 @@
+<div class="d-flex flex-row-reverse">
+  <div class="image-container"></div>
+  <form class="form-container d-flex flex-column align-items-center" [formGroup]="loginForm">
+    <p class="title">
+      Olvidé la contraseña
+    </p>
+    <p class="subtitle">
+      Por favor ingresa tu email:
+    </p>
+
+    <div class="inputs-container d-flex flex-column">
+
+      <label class="label-text">
+        Email
+      </label>
+      <input type="email" formControlName="email" class="input-text">
+
+    </div>
+
+    <button class="btn btn-ingresar" (click)="recovery()">
+      Enviar
+    </button>
+
+    <button class="btn btn-ingresar" (click)="regresar()">
+      Regresar
+    </button>
+
+    <p class="footer">
+      Todos los derechos reservados 2022 | Universidad Distrital Francisco José de Caldas ©
+    </p>
+
+  </form>
+</div>
+
+<div class="modal fade" id="modalExito" tabindex="-1" aria-labelledby="modalExitoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl-custom">
+    <div class="modal-content">
+      <div class="modal-body d-flex flex-column align-items-center">
+        <p class="modal-text">
+          Se ha enviado un mensaje a tu email para recuperar tu contraseña
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="btn-hiden" #toggleModal data-bs-toggle="modal" data-bs-target="#modalExito"></button>
